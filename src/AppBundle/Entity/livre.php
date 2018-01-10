@@ -66,7 +66,7 @@ class livre
     /**
      * @var \details_commande
      *
-     * @ORM\OneToMany(targetEntity="details_commande" , mappedBy="livre" , cascade={"remove","persist"})
+     * @ORM\ManytoOne(targetEntity="details_commande" , inversedBy="livre" , cascade={"remove","persist"})
      */
     private $livres;
 

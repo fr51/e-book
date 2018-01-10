@@ -43,6 +43,13 @@ class commande
     private $dateEnvoi;
 
     /**
+     * @var \details_commande
+     *
+     * @ORM\OneToMany(targetEntity="details_commande" , mappedBy="commande" , cascade={"remove","persist"})
+     */
+    private $commandes;
+
+    /**
      * Get id
      *
      * @return int

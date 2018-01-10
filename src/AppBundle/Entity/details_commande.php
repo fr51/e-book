@@ -24,14 +24,14 @@ class details_commande
     /**
      * @var \commande
      *
-     * @ORM\OneToOne(targetEntity="commande" , cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="commande", inversedBy="commandes")
      */
     private $commande;
 
     /**
      * @var int
      *
-     * @ORM\ManyToOne(targetEntity="livre", inversedBy="livres")
+     * @ORM\OnetoMany(targetEntity="livre", mappedBy="livres")
      */
     private $livre;
 

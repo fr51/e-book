@@ -43,12 +43,18 @@ class utilisateur
     private $mail;
 
     /**
-     * @var string
+     * @var int
      *
-     * @ORM\Column(name="commandes", type="string", length=50)
+     *@ORM\ManyToOne(targetEntity="commande", inversedBy="commande")
      */
     private $commandes;
 
+    /**
+     * @var \commande
+     *
+     * @ORM\OneToMany(targetEntity="commande" , mappedBy="utilisateur" , cascade={"remove","persist"})
+     */
+    private $utilisateur;
 
     /**
      * Get id

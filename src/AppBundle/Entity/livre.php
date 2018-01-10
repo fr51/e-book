@@ -38,7 +38,7 @@ class livre
     /**
      * @var int
      *
-     * @ORM\Column(name="editeur", type="integer")
+     * @ORM\ManyToOne(targetEntity="editeur", inversedBy="editeur")
      */
     private $editeur;
 
@@ -55,6 +55,15 @@ class livre
      * @ORM\Column(name="couverture", type="string", length=255)
      */
     private $couverture;
+
+    /**
+     * @var \commande
+     *
+     * @ORM\OneToMany(targetEntity="commande" , mappedBy="livre" , cascade={"remove","persist"})
+     */
+    private $livre;
+    
+    
 
 
     /**

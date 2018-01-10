@@ -24,16 +24,22 @@ class commande
     /**
      * @var int
      *
-     * @ORM\Column(name="utilisateur", type="integer")
+     * @ORM\ManyToOne(targetEntity="utilisateur", inversedBy="utilisateur")
      */
     private $utilisateur;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="livre", type="integer")
+     * @ORM\ManyToOne(targetEntity="livre", inversedBy="livre")
      */
     private $livre;
+    /**
+     * @var \utilisateur
+     *
+     * @ORM\OneToMany(targetEntity="utilisateur" , mappedBy="commandes" , cascade={"remove","persist"})
+     */
+    private $commande;
 
 
     /**

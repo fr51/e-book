@@ -28,6 +28,13 @@ class editeur
      */
     private $nomEditeur;
 
+    /**
+     * @var \livre
+     *
+     * @ORM\OneToMany(targetEntity="livre" , mappedBy="editeur" , cascade={"remove","persist"})
+     */
+    private $editeur;
+
 
     /**
      * Get id

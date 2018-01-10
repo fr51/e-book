@@ -24,21 +24,21 @@ class livre
     /**
      * @var string
      *
-     * @ORM\Column(name="titre", type="string", length=100)
+     * @ORM\Column(name="titre", type="string", length=50)
      */
     private $titre;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="auteur", type="string", length=50)
+     * @ORM\Column(name="auteur", type="string", length=100)
      */
     private $auteur;
 
     /**
      * @var int
      *
-     * @ORM\ManyToOne(targetEntity="editeur", inversedBy="editeur")
+     * @ORM\ManyToOne(targetEntity="editeur", inversedBy="editeurs")
      */
     private $editeur;
 
@@ -52,18 +52,23 @@ class livre
     /**
      * @var string
      *
-     * @ORM\Column(name="couverture", type="string", length=255)
+     * @ORM\Column(name="couverture", type="string", length=200)
      */
     private $couverture;
 
     /**
-     * @var \commande
+     * @var int
      *
-     * @ORM\OneToMany(targetEntity="commande" , mappedBy="livre" , cascade={"remove","persist"})
+     * @ORM\Column(name="prix_unitaire", type="integer")
      */
-    private $livre;
-    
-    
+    private $prixUnitaire;
+
+    /**
+     * @var \details_commande
+     *
+     * @ORM\OneToMany(targetEntity="details_commande" , mappedBy="livre" , cascade={"remove","persist"})
+     */
+    private $livres;
 
 
     /**
@@ -127,7 +132,7 @@ class livre
     /**
      * Set editeur
      *
-     * @param integer $editeur
+     * @param string $editeur
      *
      * @return livre
      */
@@ -141,7 +146,7 @@ class livre
     /**
      * Get editeur
      *
-     * @return int
+     * @return string
      */
     public function getEditeur()
     {
@@ -194,6 +199,30 @@ class livre
     public function getCouverture()
     {
         return $this->couverture;
+    }
+
+    /**
+     * Set prixUnitaire
+     *
+     * @param integer $prixUnitaire
+     *
+     * @return livre
+     */
+    public function setPrixUnitaire($prixUnitaire)
+    {
+        $this->prixUnitaire = $prixUnitaire;
+
+        return $this;
+    }
+
+    /**
+     * Get prixUnitaire
+     *
+     * @return int
+     */
+    public function getPrixUnitaire()
+    {
+        return $this->prixUnitaire;
     }
 }
 

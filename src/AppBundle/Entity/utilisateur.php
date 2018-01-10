@@ -31,30 +31,23 @@ class utilisateur
     /**
      * @var string
      *
-     * @ORM\Column(name="prenom", type="string", length=50)
+     * @ORM\Column(name="prenom_utilisateur", type="string", length=50)
      */
-    private $prenom;
+    private $prenomUtilisateur;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="mail", type="string", length=80)
+     * @ORM\Column(name="mail", type="string", length=100)
      */
     private $mail;
-
-    /**
-     * @var int
-     *
-     *@ORM\ManyToOne(targetEntity="commande", inversedBy="commande")
-     */
-    private $commandes;
 
     /**
      * @var \commande
      *
      * @ORM\OneToMany(targetEntity="commande" , mappedBy="utilisateur" , cascade={"remove","persist"})
      */
-    private $utilisateur;
+    private $utilisateurs;
 
     /**
      * Get id
@@ -91,27 +84,27 @@ class utilisateur
     }
 
     /**
-     * Set prenom
+     * Set prenomUtilisateur
      *
-     * @param string $prenom
+     * @param string $prenomUtilisateur
      *
      * @return utilisateur
      */
-    public function setPrenom($prenom)
+    public function setPrenomUtilisateur($prenomUtilisateur)
     {
-        $this->prenom = $prenom;
+        $this->prenomUtilisateur = $prenomUtilisateur;
 
         return $this;
     }
 
     /**
-     * Get prenom
+     * Get prenomUtilisateur
      *
      * @return string
      */
-    public function getPrenom()
+    public function getPrenomUtilisateur()
     {
-        return $this->prenom;
+        return $this->prenomUtilisateur;
     }
 
     /**
@@ -136,30 +129,6 @@ class utilisateur
     public function getMail()
     {
         return $this->mail;
-    }
-
-    /**
-     * Set commandes
-     *
-     * @param string $commandes
-     *
-     * @return utilisateur
-     */
-    public function setCommandes($commandes)
-    {
-        $this->commandes = $commandes;
-
-        return $this;
-    }
-
-    /**
-     * Get commandes
-     *
-     * @return string
-     */
-    public function getCommandes()
-    {
-        return $this->commandes;
     }
 }
 

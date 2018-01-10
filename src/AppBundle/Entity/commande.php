@@ -24,23 +24,23 @@ class commande
     /**
      * @var int
      *
-     * @ORM\ManyToOne(targetEntity="utilisateur", inversedBy="utilisateur")
+     * @ORM\ManyToOne(targetEntity="utilisateur", inversedBy="utilisateurs")
      */
     private $utilisateur;
 
     /**
-     * @var int
+     * @var \DateTime
      *
-     * @ORM\ManyToOne(targetEntity="livre", inversedBy="livre")
+     * @ORM\Column(name="date_commande", type="date")
      */
-    private $livre;
-    /**
-     * @var \utilisateur
-     *
-     * @ORM\OneToMany(targetEntity="utilisateur" , mappedBy="commandes" , cascade={"remove","persist"})
-     */
-    private $commande;
+    private $dateCommande;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_envoi", type="date")
+     */
+    private $dateEnvoi;
 
     /**
      * Get id
@@ -77,27 +77,51 @@ class commande
     }
 
     /**
-     * Set livre
+     * Set dateCommande
      *
-     * @param integer $livre
+     * @param \DateTime $dateCommande
      *
      * @return commande
      */
-    public function setLivre($livre)
+    public function setDateCommande($dateCommande)
     {
-        $this->livre = $livre;
+        $this->dateCommande = $dateCommande;
 
         return $this;
     }
 
     /**
-     * Get livre
+     * Get dateCommande
      *
-     * @return int
+     * @return \DateTime
      */
-    public function getLivre()
+    public function getDateCommande()
     {
-        return $this->livre;
+        return $this->dateCommande;
+    }
+
+    /**
+     * Set dateEnvoi
+     *
+     * @param \DateTime $dateEnvoi
+     *
+     * @return commande
+     */
+    public function setDateEnvoi($dateEnvoi)
+    {
+        $this->dateEnvoi = $dateEnvoi;
+
+        return $this;
+    }
+
+    /**
+     * Get dateEnvoi
+     *
+     * @return \DateTime
+     */
+    public function getDateEnvoi()
+    {
+        return $this->dateEnvoi;
     }
 }
 

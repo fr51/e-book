@@ -33,7 +33,7 @@ class editeur
      *
      * @ORM\OneToMany(targetEntity="livre" , mappedBy="editeur" , cascade={"remove","persist"})
      */
-    private $editeur;
+    private $editeurs;
 
 
     /**

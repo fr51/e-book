@@ -1,0 +1,33 @@
+.corp
+{
+	border: 1px solid #0000FF;
+}
+
+.boucleDiv
+{
+	width: 20%;
+	float: left;
+}
+
+table
+{
+	color: #000000;
+	min-width: 90%;
+	min-height: 40%;
+}
+
+.details_infos
+{
+	width: 49%;
+	border: 1px solid #FF0000;
+	float: left;
+	height: 700px;
+}
+
+.details_couverture
+{
+	width: 49%;
+	border: 1px solid #00FF00;
+	float: right;
+	height: 700px;
+}

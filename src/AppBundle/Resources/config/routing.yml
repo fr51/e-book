@@ -1,0 +1,15 @@
+App:
+  path: /
+  defaults: {_controller:AppBundle:Default:index}
+
+accueil:
+  path: /accueil
+  defaults: {_controller:AppBundle:Default:accueil}
+
+details:
+  path: /details/{id}
+  defaults: {_controller:AppBundle:Default:details}
+
+commande:
+  path: /commande/{id}
+  defaults: {_controller:AppBundle:Default:commande}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			détails livre
+		</title>
+
+		<link rel="stylesheet" type="text/css" href="{{ asset ("css/test.css") }}">
+
+		<link rel="icon" type="image/x-icon" href="{{ asset ("favicon.ico") }}">
+
+		<meta charset="utf-8">
+	</head>
+
+	<body>
+		<div style="border: 1px solid #FFFF00;">
+			<a href="{{ path ("accueil") }}">
+				retour
+			</a>
+		</div>
+		<div class="details_infos">
+			<table border="1">
+				<tr>
+					<th>
+						titre
+					</th>
+					<td>
+						{{ livre.titre }}
+					</td>
+				</tr>
+				<tr>
+					<th>
+						auteur
+					</th>
+					<td>
+						{{ livre.auteur }}
+					</td>
+				</tr>
+				<tr>
+					<th>
+						ISBN
+					</th>
+					<td>
+						{{ livre.iSBN }}
+					</td>
+				</tr>
+				<tr>
+					<th>
+						éditeur
+					</th>
+					<td>
+						{{ livre.editeur.nomediteur }}
+					</td>
+				</tr>
+				<tr>
+					<th>
+						prix unitaire
+					</th>
+					<td>
+						{{ livre.prixUnitaire }} €
+					</td>
+				</tr>
+				<tr>
+					<th colspan="2">
+						<a href="{{ path ("commande", {"id": livre.id}) }}">
+							commander
+						</a>
+					</th>
+				</tr>
+			</table>
+		</div>
+
+		<div class="details_couverture">
+		</div>
+	</body>
+</html>

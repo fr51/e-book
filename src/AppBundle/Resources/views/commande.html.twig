@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			accueil
+		</title>
+
+		<link rel="stylesheet" type="text/css" href="{{ asset ("css/test.css") }}">
+
+		<link rel="icon" type="image/x-icon" href="{{ asset ("favicon.ico") }}">
+
+		<meta charset="utf-8">
+	</head>
+
+	<body>
+		<table border="1">
+			<tr>
+				<th>
+					utilisateur
+				</th>
+				<th>
+					livre
+				</th>
+			</tr>
+			<tr>
+				<td>
+					?
+				</td>
+				<td>
+					{{ livre.titre }} ({{ livre.prixUnitaire }} €)
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

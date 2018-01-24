@@ -1,21 +1,15 @@
 App:
-  path: / 
+  path: /
   defaults: {_controller:AppBundle:Default:index}
 
-Accueil:
+accueil:
   path: /accueil
   defaults: {_controller:AppBundle:Default:accueil}
 
-Connexion:
-  path: /connexion
-  defaults: {_controller:AppBundle:Default:connexion}
+details:
+  path: /details/{id}
+  defaults: {_controller:AppBundle:Default:details}
 
-AjoutUtilisateur:
-  path: /addUtilisateur
-  defaults: {_controller:AppBundle:Default:addUtilisateur}
-
-Utilisateur_show:
-  path: /sport/{id}
-  defaults: {_controller:AppBundle:Default:showSport}
-  requirements:
-    id: '\d+'
+commande:
+  path: /commande/{id}
+  defaults: {_controller:AppBundle:Default:commande}

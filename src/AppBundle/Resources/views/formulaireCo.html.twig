@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('css/test.css') }}" type="text/css"/>
+    {% endblock %}
+</head>
+<body>
+    <div class="well">
+        <h3>Connexion</h3>
+        {{ form(form) }}
+
+        <p><a href="{{path("AjoutUtilisateur")}}">Création d'un user</a></p>
+    </div>
+</body>

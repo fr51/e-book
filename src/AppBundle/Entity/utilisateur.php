@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="utilisateur")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\utilisateurRepository")
  */
-class utilisateur
+class utilisateur extends BaseUser
 {
     /**
      * @var int
@@ -19,36 +20,13 @@ class utilisateur
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="nom_utilisateur", type="string", length=50)
-     */
-    private $nomUtilisateur;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="prenom_utilisateur", type="string", length=50)
-     */
-    private $prenomUtilisateur;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="mail", type="string", length=100)
-     */
-    private $mail;
-
+    protected $id;
     /**
      * @var \commande
      *
      * @ORM\OneToMany(targetEntity="commande" , mappedBy="utilisateur" , cascade={"remove","persist"})
      */
     private $utilisateurs;
-
     /**
      * Get id
      *
@@ -107,28 +85,48 @@ class utilisateur
         return $this->prenomUtilisateur;
     }
 
+    
     /**
-     * Set mail
+     * Constructor
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        // your own logic
+        $this->utilisateurs = new \Doctrine\Common\Collections\ArrayCollection();
+        
+    }
+    /**
+     * Add utilisateur
      *
-     * @param string $mail
+     * @param \AppBundle\Entity\commande $utilisateur
      *
      * @return utilisateur
      */
-    public function setMail($mail)
+    public function addUtilisateur(\AppBundle\Entity\commande $utilisateur)
     {
-        $this->mail = $mail;
+        $this->utilisateurs[] = $utilisateur;
 
         return $this;
     }
 
     /**
-     * Get mail
+     * Remove utilisateur
      *
-     * @return string
+     * @param \AppBundle\Entity\commande $utilisateur
      */
-    public function getMail()
+    public function removeUtilisateur(\AppBundle\Entity\commande $utilisateur)
     {
-        return $this->mail;
+        $this->utilisateurs->removeElement($utilisateur);
+    }
+
+    /**
+     * Get utilisateurs
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUtilisateurs()
+    {
+        return $this->utilisateurs;
     }
 }
-

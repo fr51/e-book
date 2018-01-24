@@ -31,7 +31,7 @@ class details_commande
     /**
      * @var int
      *
-     * @ORM\OnetoMany(targetEntity="livre", mappedBy="livres")
+     * @ORM\ManyToOne(targetEntity="livre", inversedBy="livres")
      */
     private $livre;
 

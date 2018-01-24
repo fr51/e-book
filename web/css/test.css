@@ -1,0 +1,21 @@
+.test
+{
+    background-color:grey;
+    width:100%;
+    padding-top:50px
+}
+table
+{
+    color:black;
+    min-width: 90%;
+    min-height: 40%;
+}
+.corp 
+{
+    margin-top:10px;
+}
+.boucleDiv
+{
+    width:20%;
+    float:left;
+}

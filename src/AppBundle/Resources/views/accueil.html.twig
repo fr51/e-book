@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="test">
-        <form class="bouton" action="{{path("Connexion")}}" method="POST">
+        <form class="bouton" action="http://localhost/ebook/web/app_dev.php/login" method="POST">
             <input type="submit" name="connexion" value="Connexion" />
         </form> 
     </div>
@@ -27,7 +27,7 @@
                     <td>Auteur : {{ livre.auteur }}</td>
                 </tr>
                 <tr>
-                    <td>Prix : {{ livre.prixUnitaire }} €</td>
+                    <td>Prix : {{ livre.prixUnitaire }} â‚¬</td>
                 </tr>
             </table>
         </div>

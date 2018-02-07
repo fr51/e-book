@@ -1,0 +1,7 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% block fos_user_content %}
+    {{ include('@FOSUser/Security/login_content.html.twig') }}
+
+    <a href="http://localhost/ebook/web/app_dev.php/register">Création d'un utilisateur nul</a>
+{% endblock fos_user_content %}

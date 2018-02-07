@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use AppBundle\Entity\utilisateur;
+use Symfony\Component\Security\Core\Security;
 
 class DefaultController extends Controller
 {

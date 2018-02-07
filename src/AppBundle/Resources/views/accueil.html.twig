@@ -1,46 +1,45 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8" />
-    <title>{% block title %}Welcome!{% endblock %}</title>
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('css/test.css') }}" type="text/css"/>
-    {% endblock %}
-
-</head>
-<body>
-    <div class="test">
-        <form class="bouton" action="http://localhost/ebook/web/app_dev.php/login" method="POST">
-            <input type="submit" name="connexion" value="Connexion" />
-        </form> 
-    </div>
-    <div>
-    <center>
-        <h2>Recherche</h2>
-        <form method="post" action="accueil.html.twig">
-            <input type="text" name="letre"></input>
-            <input type="submit" value="Recherche" />
-        </form>
-    </center>
-    </div>
-    <div class="corp">
-        {% for livre in livres %}
-        <div class="boucleDiv">
-            <table border="1">
-                <tr>
-                    <td rowspan=3>{{ livre.couverture }}</td>
-                    <td>Titre : {{ livre.titre }}</td>
-                </tr>
-                <tr>
-                    <td>Auteur : {{ livre.auteur }}</td>
-                </tr>
-                <tr>
-                    <td>Prix : {{ livre.prixUnitaire }} €</td>
-                </tr>
-            </table>
-        </div>
-        {% endfor %}
-    </div>
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<title>{% block title %}Welcome!{% endblock %}</title>
+		<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+		{% block stylesheets %}
+				<link rel="stylesheet" href="{{ asset('css/test.css') }}" type="text/css"/>
+		{% endblock %}
+	</head>
+	<body>
+		<div class="test">
+			<form class="bouton" action="http://localhost/ebook/web/app_dev.php/login" method="POST">
+				<input type="submit" name="connexion" value="Connexion" />
+			</form>
+		</div>
+		<div>
+		<center>
+			<h2>Recherche</h2>
+			<form method="post" action="accueil.html.twig">
+				<input type="text" name="letre">
+				<input type="submit" value="Recherche" />
+			</form>
+		</center>
+		</div>
+		<div class="corp">
+			{% for livre in livres %}
+				<div class="boucleDiv">
+					<table border="1">
+						<tr>
+							<td rowspan=3>{{ livre.couverture }}</td>
+							<td>Titre : {{ livre.titre }}</td>
+						</tr>
+						<tr>
+							<td>Auteur : {{ livre.auteur }}</td>
+						</tr>
+						<tr>
+							<td>Prix : {{ livre.prixUnitaire }} €</td>
+						</tr>
+					</table>
+				</div>
+			{% endfor %}
+		</div>
+	</body>
 </html>

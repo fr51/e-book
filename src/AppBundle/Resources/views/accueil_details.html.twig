@@ -11,9 +11,15 @@
 	<body>
 		<div class="test">
 			<form class="bouton" action="http://localhost/ebook/web/app_dev.php/login" method="POST">
-				<input type="submit" name="connexion" value="Connexion" />
+				<input type="submit" name="connexion" value="Déconnexion" />
 			</form>
 		</div>
+
+		<br>
+		<br>
+
+		Bienvenue, Prénom Nom
+
 		<div class="corp">
 			{% for livre in livres %}
 				<div class="boucleDiv">

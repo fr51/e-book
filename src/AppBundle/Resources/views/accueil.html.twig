@@ -10,16 +10,23 @@
 
 </head>
 <body>
-    <div class="test">
-        <form class="bouton" action="http://localhost/ebook/web/app_dev.php/login" method="POST">
-            <input type="submit" name="connexion" value="Connexion" />
-        </form> 
+    <div class="bouton">
+        <div class="connexion">
+            <form class="bouton" action="http://localhost/ebook/web/app_dev.php/login" method="POST">
+                <input type="submit" name="connexion" value="Connexion" />
+            </form> 
+        </div>
+        <div class="inscription">
+            <form class="bouton" action="http://localhost/ebook/web/app_dev.php/register" method="POST">
+                <input type="submit" name="inscription" value="inscription" />
+            </form> 
+        </div>
     </div>
     <div>
     <center>
         <h2>Recherche</h2>
-        <form method="post" action="accueil.html.twig">
-            <input type="text" name="letre"></input>
+        <form method="post" action="http://localhost/ebook/web/app_dev.php/recherche">
+            <input type="text" name="lettre"></input>
             <input type="submit" value="Recherche" />
         </form>
     </center>

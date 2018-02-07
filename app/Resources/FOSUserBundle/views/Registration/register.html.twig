@@ -1,0 +1,16 @@
+{% block fos_user_content %}
+{% block stylesheets %}
+     <link rel="stylesheet" href="{{ asset('css/test.css') }}" type="text/css"/>
+{% endblock %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+<div class="formulaire">
+    {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+        {{ form_widget(form) }}
+        <div>
+            <input type="submit" value="{{ 'registration.submit'|trans }}" />
+        </div>
+    {{ form_end(form) }}
+
+    {% endblock fos_user_content %}
+</div>

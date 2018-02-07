@@ -31,3 +31,16 @@ table
 	float: right;
 	height: 700px;
 }
+.formulaire
+{
+	border-width:2px;
+	border-color:black;
+	border-style: solid;
+	width:20%;
+	margin-left:40%;
+	margin-top:20%;
+}
+.bouton
+{
+	display: flex;
+}

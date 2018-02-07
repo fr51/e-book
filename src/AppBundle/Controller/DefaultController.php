@@ -29,6 +29,15 @@ class DefaultController extends Controller
 		return ($this->render ("@App/accueil.html.twig", ["livres" => $livres]));
 	}
 
+	public function rechercheAction (Request $request)
+	{
+		$em=$this->getDoctrine ()->getManager ();
+
+		$livres=$em->getRepository ("AppBundle:livre")->findAll ();
+
+		return ($this->render ("@App/accueil.html.twig", ["livres" => $livres]));
+	}
+
 	public function detailsAction (Request $request, $id)
 	{
 		$em=$this->getDoctrine ()->getManager ();

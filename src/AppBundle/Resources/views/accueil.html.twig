@@ -15,6 +15,15 @@
             <input type="submit" name="connexion" value="Connexion" />
         </form> 
     </div>
+    <div>
+    <center>
+        <h2>Recherche</h2>
+        <form method="post" action="accueil.html.twig">
+            <input type="text" name="letre"></input>
+            <input type="submit" value="Recherche" />
+        </form>
+    </center>
+    </div>
     <div class="corp">
         {% for livre in livres %}
         <div class="boucleDiv">

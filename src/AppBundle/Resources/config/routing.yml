@@ -13,3 +13,7 @@ details:
 commande:
   path: /commande/{id}
   defaults: {_controller:AppBundle:Default:commande}
+
+accueil:
+  path: /recherche/{lettre}
+  defaults: {_controller:AppBundle:Default:recherche}

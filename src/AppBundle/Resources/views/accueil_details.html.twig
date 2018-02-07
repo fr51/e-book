@@ -9,11 +9,13 @@
 		{% endblock %}
 	</head>
 	<body>
+		{% if app.user %}
 		<div class="test">
-			<form class="bouton" action="http://localhost/ebook/web/app_dev.php/login" method="POST">
+			<form class="bouton" action="http://localhost/ebook/web/app_dev.php/accueil" method="POST">
 				<input type="submit" name="connexion" value="Déconnexion" />
 			</form>
 		</div>
+		{% endif %}
 
 		<br>
 		<br>

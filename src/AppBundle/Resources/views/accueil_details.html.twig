@@ -9,11 +9,19 @@
 		{% endblock %}
 	</head>
 	<body>
+		{% if app.user %}
 		<div class="test">
-			<form class="bouton" action="http://localhost/ebook/web/app_dev.php/login" method="POST">
-				<input type="submit" name="connexion" value="Connexion" />
+			<form class="bouton" action="http://localhost/ebook/web/app_dev.php/accueil" method="POST">
+				<input type="submit" name="connexion" value="Déconnexion" />
 			</form>
 		</div>
+		{% endif %}
+
+		<br>
+		<br>
+
+		Bienvenue, {{ app.user.username }}
+
 		<div class="corp">
 			{% for livre in livres %}
 				<div class="boucleDiv">

@@ -6,6 +6,10 @@ accueil:
   path: /accueil
   defaults: {_controller:AppBundle:Default:accueil}
 
+accueil_details:
+  path: /accueil_details
+  defaults: {_controller:AppBundle:Default:accueil_details}
+
 details:
   path: /details/{id}
   defaults: {_controller:AppBundle:Default:details}

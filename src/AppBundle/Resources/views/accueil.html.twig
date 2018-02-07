@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8" />
-    <title>{% block title %}Welcome!{% endblock %}</title>
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('css/test.css') }}" type="text/css"/>
-    {% endblock %}
+	<head>
+		<meta charset="UTF-8" />
+		<title>{% block title %}Welcome!{% endblock %}</title>
+		<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+		{% block stylesheets %}
+				<link rel="stylesheet" href="{{ asset('css/test.css') }}" type="text/css"/>
+		{% endblock %}
+	</head>
+	<body>
+		{% if not app.user %}
+			<div class="test">
+				<form class="bouton" action="http://localhost/ebook/web/app_dev.php/login" method="POST">
+					<input type="submit" name="connexion" value="Connexion" />
+				</form>
+			</div>
+		{% endif %}
 
-</head>
-<body>
     <div class="bouton">
         <div class="connexion">
             <form class="bouton" action="http://localhost/ebook/web/app_dev.php/login" method="POST">

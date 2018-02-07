@@ -9,12 +9,48 @@
 
 		<link rel="icon" type="image/x-icon" href="{{ asset ("favicon.ico") }}">
 
+		<script type="text/javascript" src="{{ asset ("JS/jquery-3.3.1.min.js") }}">
+		</script>
+
+		<script type="text/javascript">
+			$ (document).ready (function ()
+			{
+				$ ("#commander").click (function ()
+				{
+					alert ("tmp");
+
+					var url="{{ path ('commande', { 'id': 0 }) }}";
+					url=url.replace ("0", id);
+					console.log (url); //tmp
+
+					/*$.ajax (
+					{
+						type: "POST",
+						url: url,
+						dataType: "json",
+						data:
+						{
+							//?
+						},
+						success: function (resultat)
+						{
+							alert (resultat);
+						},
+						error: function (erreur)
+						{
+							console.log (erreur.responseText);
+						}
+					});*/
+				})
+			});
+		</script>
+
 		<meta charset="utf-8">
 	</head>
 
 	<body>
 		<div style="border: 1px solid #FFFF00;">
-			<a href="{{ path ("accueil") }}">
+			<a href="{{ path ("accueil_details") }}">
 				retour
 			</a>
 		</div>
@@ -62,9 +98,7 @@
 				</tr>
 				<tr>
 					<th colspan="2">
-						<a href="{{ path ("commande", {"id": livre.id}) }}">
-							commander
-						</a>
+						<input type="button" value="commander" id="commander">
 					</th>
 				</tr>
 			</table>

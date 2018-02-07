@@ -16,27 +16,27 @@
 				</form>
 			</div>
 		{% endif %}
-
-    <div class="bouton">
-        <div class="connexion">
-            <form class="bouton" action="http://localhost/ebook/web/app_dev.php/login" method="POST">
-                <input type="submit" name="connexion" value="Connexion" />
-            </form> 
+    <div class="image">
+        <div class="bouton">
+            <div class="connexion">
+                <form class="bouton" action="http://localhost/ebook/web/app_dev.php/login" method="POST">
+                    <input type="submit" name="connexion" value="Connexion" />
+                </form> 
+            </div>
+            <div class="inscription">
+                <form class="bouton" action="http://localhost/ebook/web/app_dev.php/register" method="POST">
+                    <input type="submit" name="inscription" value="Inscription" />
+                </form> 
+            </div>
         </div>
-        <div class="inscription">
-            <form class="bouton" action="http://localhost/ebook/web/app_dev.php/register" method="POST">
-                <input type="submit" name="inscription" value="inscription" />
-            </form> 
+        <div class="recherche">
+        <center>
+            <form method="post" action="http://localhost/ebook/web/app_dev.php/recherche">
+                <input type="text" name="lettre" placeholder="Rechercher"></input>
+                <input type="submit" value="Recherche" />
+            </form>
+        </center>
         </div>
-    </div>
-    <div>
-    <center>
-        <h2>Recherche</h2>
-        <form method="post" action="http://localhost/ebook/web/app_dev.php/recherche">
-            <input type="text" name="lettre"></input>
-            <input type="submit" value="Recherche" />
-        </form>
-    </center>
     </div>
     <div class="corp">
         {% for livre in livres %}

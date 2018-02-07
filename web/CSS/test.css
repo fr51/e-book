@@ -1,6 +1,8 @@
 .corp
 {
-	border: 1px solid #0000FF;
+	background-color: #FFFFF0;
+	border: 1px solid black;
+	height: 400px;
 }
 
 .boucleDiv
@@ -11,7 +13,7 @@
 
 table
 {
-	color: #000000;
+	color: black;
 	min-width: 90%;
 	min-height: 40%;
 }
@@ -43,4 +45,13 @@ table
 .bouton
 {
 	display: flex;
+}
+.image
+{
+	background-image: url('../img/biblio.jpg');
+	height: 300px;
+}
+.recherche
+{
+	margin-top:10%;
 }

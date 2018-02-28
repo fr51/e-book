@@ -26,14 +26,7 @@ class DefaultController extends Controller
 		$em=$this->getDoctrine ()->getManager();
 		if (isset($_GET['titre']))
 		{
-			$titreRecherche = $_GET['titre'];
-			$repository = $em->getRepository('AppBundle:livre');
-			$query = $repository->createQueryBuilder('p')
-			->select('p')
-			->where('p.titre LIKE :titreRecherche')
-			->setParameters(['titreRecherche'=> '%'.$titreRecherche.'%'])
-			->getQuery();
-			$livres = $query->getResult();
+			$livres = $this->recherche($_GET['titre'],$em);
 			return ($this->render ("@App/accueil.html.twig", ["livres" => $livres]));
 		}
 		else
@@ -47,14 +40,7 @@ class DefaultController extends Controller
 		$em=$this->getDoctrine ()->getManager ();
 		if (isset($_GET['titre']))
 		{
-			$titreRecherche = $_GET['titre'];
-			$repository = $em->getRepository('AppBundle:livre');
-			$query = $repository->createQueryBuilder('p')
-			->select('p')
-			->where('p.titre LIKE :titreRecherche')
-			->setParameters(['titreRecherche'=> '%'.$titreRecherche.'%'])
-			->getQuery();
-			$livres = $query->getResult();
+			$livres = $this->recherche($_GET['titre'],$em);
 			return ($this->render ("@App/accueil_details.html.twig", ["livres" => $livres]));
 		}
 		else
@@ -78,8 +64,19 @@ class DefaultController extends Controller
 	{
 		$em=$this->getDoctrine ()->getManager();
 
-		$livre=$em->getRepository ("AppBundle:livre")->find ($id);
+		$livre=$em->getRepository ("AppBundle:livre")->find($id);
 
 		return ($this->render ("@App/commande.html.twig", ["livre" => $livre]));
+	}
+
+	private function recherche(string $titreRecherche,$em)
+	{
+		$repository = $em->getRepository('AppBundle:livre');
+		$query = $repository->createQueryBuilder('p')
+		->select('p')
+		->where('p.titre LIKE :titreRecherche')
+		->setParameters(['titreRecherche'=> '%'.$titreRecherche.'%'])
+		->getQuery();
+		 return $query->getResult();
 	}
 }

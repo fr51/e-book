@@ -9,52 +9,53 @@
 		{% endblock %}
 	</head>
 	<body>
-		{% if not app.user %}
-			<div class="test">
-				<form class="bouton" action="http://localhost/ebook/web/app_dev.php/login" method="POST">
-					<input type="submit" name="connexion" value="Connexion" />
-				</form>
-			</div>
-		{% endif %}
+		<div class="bouton">
+			{% if not app.user %}
+				<div class="connexion">
+					<form class="bouton" action="http://localhost/ebook/web/app_dev.php/login" method="POST">
+						<input type="submit" name="connexion" value="Connexion" />
+					</form>
+				</div>
 
-    <div class="bouton">
-        <div class="connexion">
-            <form class="bouton" action="http://localhost/ebook/web/app_dev.php/login" method="POST">
-                <input type="submit" name="connexion" value="Connexion" />
-            </form> 
-        </div>
-        <div class="inscription">
-            <form class="bouton" action="http://localhost/ebook/web/app_dev.php/register" method="POST">
-                <input type="submit" name="inscription" value="inscription" />
-            </form> 
-        </div>
-    </div>
-    <div>
-    <center>
-        <h2>Recherche</h2>
-        <form method="post" action="http://localhost/ebook/web/app_dev.php/recherche">
-            <input type="text" name="lettre"></input>
-            <input type="submit" value="Recherche" />
-        </form>
-    </center>
-    </div>
-    <div class="corp">
-        {% for livre in livres %}
-        <div class="boucleDiv">
-            <table border="1">
-                <tr>
-                    <td rowspan=3>{{ livre.couverture }}</td>
-                    <td>Titre : {{ livre.titre }}</td>
-                </tr>
-                <tr>
-                    <td>Auteur : {{ livre.auteur }}</td>
-                </tr>
-                <tr>
-                    <td>Prix : {{ livre.prixUnitaire }} €</td>
-                </tr>
-            </table>
-        </div>
-        {% endfor %}
-    </div>
-</body>
+				<div class="inscription">
+					<form class="bouton" action="http://localhost/ebook/web/app_dev.php/register" method="POST">
+						<input type="submit" name="inscription" value="Inscription" />
+					</form>
+				</div>
+			{% else %}
+				<div class="connexion">
+					<form class="bouton" action="http://localhost/ebook/web/app_dev.php/logout" method="POST"> <!--à vérifier-->
+						<input type="submit" name="déconnexion" value="Déconnexion" />
+					</form>
+				</div>
+			{% endif %}
+		</div>
+		<div>
+			<center>
+				<h2>Recherche</h2>
+				<form method="post" action="http://localhost/ebook/web/app_dev.php/recherche">
+					<input type="text" name="lettre">
+					<input type="submit" value="Recherche" />
+				</form>
+			</center>
+		</div>
+		<div class="corp">
+			{% for livre in livres %}
+				<div class="boucleDiv">
+					<table border="1">
+						<tr>
+							<td rowspan=3>{{ livre.couverture }}</td>
+							<td>Titre : {{ livre.titre }}</td>
+						</tr>
+						<tr>
+							<td>Auteur : {{ livre.auteur }}</td>
+						</tr>
+						<tr>
+							<td>Prix : {{ livre.prixUnitaire }} €</td>
+						</tr>
+					</table>
+				</div>
+			{% endfor %}
+		</div>
+	</body>
 </html>

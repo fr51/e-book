@@ -17,30 +17,34 @@
 			{
 				$ ("#commander").click (function ()
 				{
-					alert ("tmp");
+					var livre={{ livre.id }};
+					var utilisateur={{ app.user.id }}
+					var quantite=$ ("#quantite").val ();
 
 					var url="{{ path ('commande', { 'id': 0 }) }}";
-					url=url.replace ("0", id);
-					console.log (url); //tmp
+					url=url.replace ("0", livre);
 
-					/*$.ajax (
+					$.ajax (
 					{
 						type: "POST",
 						url: url,
-						dataType: "json",
+						dataType: null,
+						async: true,
 						data:
 						{
-							//?
+							livre: livre,
+							utilisateur: utilisateur,
+							quantite: quantite
 						},
 						success: function (resultat)
 						{
-							alert (resultat);
+							alert ("commande effectuée");
 						},
 						error: function (erreur)
 						{
-							console.log (erreur.responseText);
+							alert ("erreur lors de la commande");
 						}
-					});*/
+					});
 				})
 			});
 		</script>
@@ -77,7 +81,7 @@
 						ISBN
 					</th>
 					<td>
-						{{ livre.iSBN }}
+						{{ livre.ISBN }}
 					</td>
 				</tr>
 				<tr>
@@ -99,6 +103,14 @@
 				<tr>
 					<th colspan="2">
 						<input type="button" value="commander" id="commander">
+
+						<select name="quantite" id="quantite">
+							{% for i in 1..10 %} {#finir ajout details commande et faire page panier#}
+								<option value="{{ i }}">
+									{{ i }}
+								</option>
+							{% endfor %}
+						</select>
 					</th>
 				</tr>
 			</table>

@@ -22,14 +22,14 @@ class details_commande
     private $id;
     
     /**
-     * @var \commande
+     * @var \AppBundle\Entity\commande
      *
      * @ORM\ManyToOne(targetEntity="commande", inversedBy="commandes")
      */
     private $commande;
 
     /**
-     * @var int
+     * @var \AppBundle\Entity\livre
      *
      * @ORM\ManyToOne(targetEntity="livre", inversedBy="livres")
      */
@@ -63,7 +63,7 @@ class details_commande
     /**
      * Set commande
      *
-     * @param integer $commande
+     * @param \AppBundle\Entity\commande $commande
      *
      * @return details_commande
      */
@@ -77,7 +77,7 @@ class details_commande
     /**
      * Get commande
      *
-     * @return int
+     * @return \AppBundle\Entity\commande
      */
     public function getCommande()
     {
@@ -87,7 +87,7 @@ class details_commande
     /**
      * Set livre
      *
-     * @param integer $livre
+     * @param \AppBundle\Entity\livre $livre
      *
      * @return details_commande
      */
@@ -101,7 +101,7 @@ class details_commande
     /**
      * Get livre
      *
-     * @return int
+     * @return \AppBundle\Entity\livre
      */
     public function getLivre()
     {
@@ -156,4 +156,3 @@ class details_commande
         return $this->quantite;
     }
 }
-

@@ -10,26 +10,35 @@
 	</head>
 	<body>
 		{% if app.user %}
-		<div class="test">
-			<form class="bouton" action="http://localhost/ebook/web/app_dev.php/accueil" method="POST">
-				<input type="submit" name="connexion" value="Déconnexion" />
-			</form>
+		<div class="image">
+			<div class="test">
+				<form class="bouton" action="http://localhost/ebook/web/app_dev.php/accueil" method="POST">
+					<input type="submit" name="connexion" value="Déconnexion" />
+				</form>
+			</div>
+			{% endif %}
+
+			<br>
+			<br>
+
+			Bienvenue, {{ app.user.username }}
 		</div>
-		{% endif %}
-
-		<br>
-		<br>
-
-		Bienvenue, {{ app.user.username }}
-
 		<div class="corp">
+			<div class="recherche">
+				<center>
+					<form method="get" action="http://localhost/ebook/web/app_dev.php/accueil_details">
+						<input type="text" name="titre" placeholder="Rechercher"></input>
+						<input type="submit" value="Recherche" />
+					</form>
+				</center>
+        	</div>
 			{% for livre in livres %}
 				<div class="boucleDiv">
 					<table border="1">
 						<tr>
 							<td rowspan=3>
 								<a href="{{ path ("details", {"id": livre.id}) }}">
-									{{ livre.couverture }}
+									<img src="{{ asset('img/'~ livre.couverture)}}" width="100" height="120">
 								</a>
 							</td>
 							<td>

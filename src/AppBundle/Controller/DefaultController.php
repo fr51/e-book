@@ -102,8 +102,10 @@ class DefaultController extends Controller
 		return ($reponse);
 	}
 
-	private function recherche(string $titreRecherche,$em)
+	private function recherche ($titreRecherche, $em)
 	{
+		$titreRecherche=(string) $titreRecherche;
+
 		$repository = $em->getRepository('AppBundle:livre');
 		$query = $repository->createQueryBuilder('p')
 		->select('p')
@@ -111,5 +113,10 @@ class DefaultController extends Controller
 		->setParameters(['titreRecherche'=> '%'.$titreRecherche.'%'])
 		->getQuery();
 		 return $query->getResult();
+	}
+
+	public function panierAction (Request $requete)
+	{
+		return ($this->render ("@App/panier.html.twig"));
 	}
 }

@@ -24,39 +24,51 @@ class DefaultController extends Controller
 	{
 		
 		$em=$this->getDoctrine ()->getManager();
-
-		$livres=$em->getRepository ("AppBundle:livre")->findAll();
-
-		return ($this->render ("@App/accueil.html.twig", ["livres" => $livres]));
-
-	}
-
-	public function accueil_detailsAction (Request $request)
-	{
-		$em=$this->getDoctrine ()->getManager ();
-
-		$livres=$em->getRepository ("AppBundle:livre")->findAll ();
-
-		return ($this->render ("@App/accueil_details.html.twig", ["livres" => $livres]));
-	}
-	public function rechercheAction (Request $request)
-	{
-		$em=$this->getDoctrine ()->getManager ();
-		$requete = $this->get('request');
-		if($requete->getMethod() == 'POST')
-		{ 
-			$lettre = $_POST['lettre']; 
-			$livres=$em->getRepository ("AppBundle:livre")->findBy(
-				array('title' =>'%$lettre%')
-			);
+		if (isset($_GET['titre']))
+		{
+			$titreRecherche = $_GET['titre'];
+			$repository = $em->getRepository('AppBundle:livre');
+			$query = $repository->createQueryBuilder('p')
+			->select('p')
+			->where('p.titre LIKE :titreRecherche')
+			->setParameters(['titreRecherche'=> '%'.$titreRecherche.'%'])
+			->getQuery();
+			$livres = $query->getResult();
+			return ($this->render ("@App/accueil.html.twig", ["livres" => $livres]));
+		}
+		else
+		{
+			$livres=$em->getRepository ("AppBundle:livre")->findAll();
 			return ($this->render ("@App/accueil.html.twig", ["livres" => $livres]));
 		}
 	}
-
-	public function detailsAction (Request $request, $id)
+	public function accueil_detailsAction (Request $request)
 	{
 		$em=$this->getDoctrine ()->getManager ();
+		if (isset($_GET['titre']))
+		{
+			$titreRecherche = $_GET['titre'];
+			$repository = $em->getRepository('AppBundle:livre');
+			$query = $repository->createQueryBuilder('p')
+			->select('p')
+			->where('p.titre LIKE :titreRecherche')
+			->setParameters(['titreRecherche'=> '%'.$titreRecherche.'%'])
+			->getQuery();
+			$livres = $query->getResult();
+			return ($this->render ("@App/accueil_details.html.twig", ["livres" => $livres]));
+		}
+		else
+		{
+			$livres=$em->getRepository ("AppBundle:livre")->findAll ();
 
+			return ($this->render ("@App/accueil_details.html.twig", ["livres" => $livres]));
+		}
+		
+	}
+	public function detailsAction (Request $request, $id)
+	{
+		$em=$this->getDoctrine ()->getManager();
+		
 		$livre=$em->getRepository ("AppBundle:livre")->find ($id);
 
 		return ($this->render ("@App/details.html.twig", ["livre" => $livre]));
@@ -64,7 +76,7 @@ class DefaultController extends Controller
 
 	public function commandeAction (Request $request, $id)
 	{
-		$em=$this->getDoctrine ()->getManager ();
+		$em=$this->getDoctrine ()->getManager();
 
 		$livre=$em->getRepository ("AppBundle:livre")->find ($id);
 

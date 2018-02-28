@@ -18,6 +18,3 @@ commande:
   path: /commande/{id}
   defaults: {_controller:AppBundle:Default:commande}
 
-recherche:
-  path: /recherche
-  defaults: {_controller:AppBundle:Default:recherche}

@@ -9,14 +9,7 @@
 		{% endblock %}
 	</head>
 	<body>
-		{% if not app.user %}
-			<div class="test">
-				<form class="bouton" action="http://localhost/ebook/web/app_dev.php/login" method="POST">
-					<input type="submit" name="connexion" value="Connexion" />
-				</form>
-			</div>
-		{% endif %}
-    <div class="image">
+	<div class="image">
         <div class="bouton">
             <div class="connexion">
                 <form class="bouton" action="http://localhost/ebook/web/app_dev.php/login" method="POST">
@@ -29,21 +22,21 @@
                 </form> 
             </div>
         </div>
-        <div class="recherche">
-        <center>
-            <form method="post" action="http://localhost/ebook/web/app_dev.php/recherche">
-                <input type="text" name="lettre" placeholder="Rechercher"></input>
-                <input type="submit" value="Recherche" />
-            </form>
-        </center>
-        </div>
     </div>
     <div class="corp">
+        <div class="recherche">
+            <center>
+                <form method="get" action="http://localhost/ebook/web/app_dev.php/accueil">
+                    <input type="text" name="titre" placeholder="Rechercher"></input>
+                    <input type="submit" value="Recherche" />
+                </form>
+            </center>
+        </div>
         {% for livre in livres %}
         <div class="boucleDiv">
             <table border="1">
                 <tr>
-                    <td rowspan=3>{{ livre.couverture }}</td>
+                    <td rowspan="3"><img src="{{ asset('img/'~ livre.couverture)}}" width="100" height="120"></td>
                     <td>Titre : {{ livre.titre }}</td>
                 </tr>
                 <tr>

@@ -26,11 +26,12 @@ class DefaultController extends Controller
 
     public function accueilAction (Request $request)
 	{
-		
+		$getAuteur = $request->get('auteur');
+		$getTitre = $request->get('titre');
 		$em=$this->getDoctrine ()->getManager();
-		if (isset($_GET['titre']) && (isset($_GET['auteur'])))
+		if ($getTitre !== null && $getAuteur  !== null)
 		{
-			$livres = $this->recherche($_GET['titre'],$_GET['auteur'],$em);
+			$livres = $this->recherche($getTitre,$getAuteur,$em);
 		}
 		else
 		{
@@ -41,10 +42,12 @@ class DefaultController extends Controller
 	}
 	public function accueil_detailsAction (Request $request)
 	{
+		$getAuteur = $request->get('auteur');
+		$getTitre = $request->get('titre');
 		$em=$this->getDoctrine ()->getManager ();
-		if (isset($_GET['titre']) && (isset($_GET['auteur'])))
+		if ($getTitre !== null && $getAuteur  !== null)
 		{
-			$livres = $this->recherche($_GET['titre'],$_GET['auteur'],$em);
+			$livres = $this->recherche($getTitre,$getAuteur,$em);
 		}
 		else
 		{
@@ -64,8 +67,8 @@ class DefaultController extends Controller
 
 	public function commandeAction (Request $requete)
 	{
-		$id=(int) $requete->request->get ("livre");
-		$quantite=$requete->request->get ("quantite");
+		$id=(int) $requete->request->get("livre");
+		$quantite=$requete->request->get("quantite");
 
 		$utilisateur=$this->container->get ("security.token_storage")->getToken ()->getUser ();
 

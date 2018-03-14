@@ -64,14 +64,6 @@ class livre
     private $prixUnitaire;
 
     /**
-     * @var \details_commande
-     *
-     * @ORM\OneToMany(targetEntity="details_commande" , mappedBy="livre" , cascade={"remove","persist"})
-     */
-    private $livres;
-
-
-    /**
      * Get id
      *
      * @return int

@@ -10,19 +10,20 @@
 	</head>
 	<body>
 		{% if app.user %}
-		<div class="image">
-			<div class="test">
-				<form class="bouton" action="http://localhost/ebook/web/app_dev.php/accueil" method="POST">
-					<input type="submit" name="connexion" value="Déconnexion" />
-				</form>
+			<div class="image">
+				<div class="test">
+					<form class="bouton" action="http://localhost/ebook/web/app_dev.php/accueil" method="POST">
+						<input type="submit" name="connexion" value="Déconnexion" />
+					</form>
+				</div>
+
+				<br>
+				<br>
+
+				Bienvenue, {{ app.user.username }}
 			</div>
-			{% endif %}
+		{% endif %}
 
-			<br>
-			<br>
-
-			Bienvenue, {{ app.user.username }}
-		</div>
 		<div class="corp">
 			<div class="recherche">
 				<center>

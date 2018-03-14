@@ -28,31 +28,29 @@ class DefaultController extends Controller
 	{
 		
 		$em=$this->getDoctrine ()->getManager();
-		if (isset($_GET['titre']))
+		if (isset($_GET['titre']) && (isset($_GET['auteur'])))
 		{
-			$livres = $this->recherche($_GET['titre'],$em);
-			return ($this->render ("@App/accueil.html.twig", ["livres" => $livres]));
+			$livres = $this->recherche($_GET['titre'],$_GET['auteur'],$em);
 		}
 		else
 		{
 			$livres=$em->getRepository ("AppBundle:livre")->findAll();
-			return ($this->render ("@App/accueil.html.twig", ["livres" => $livres]));
 		}
+		return ($this->render ("@App/accueil.html.twig", ["livres" => $livres]));
+
 	}
 	public function accueil_detailsAction (Request $request)
 	{
 		$em=$this->getDoctrine ()->getManager ();
-		if (isset($_GET['titre']))
+		if (isset($_GET['titre']) && (isset($_GET['auteur'])))
 		{
-			$livres = $this->recherche($_GET['titre'],$em);
-			return ($this->render ("@App/accueil_details.html.twig", ["livres" => $livres]));
+			$livres = $this->recherche($_GET['titre'],$_GET['auteur'],$em);
 		}
 		else
 		{
 			$livres=$em->getRepository ("AppBundle:livre")->findAll ();
-
-			return ($this->render ("@App/accueil_details.html.twig", ["livres" => $livres]));
 		}
+		return ($this->render ("@App/accueil_details.html.twig", ["livres" => $livres]));
 		
 	}
 	public function detailsAction (Request $request, $id)
@@ -105,20 +103,40 @@ class DefaultController extends Controller
 
 		return ($reponse);
 	}
-
-	private function recherche ($titreRecherche, $em)
+	private function recherche ($titreRecherche,$auteurRecherche, $em)
 	{
 		$titreRecherche=(string) $titreRecherche;
+		$auteurRecherche=(string) $auteurRecherche;
 
+		if ($auteurRecherche!= "")
+		{
+			$where = "p.auteur LIKE :auteurRecherche";
+			$param = ['auteurRecherche'=> '%'.$auteurRecherche.'%'];
+			if ($titreRecherche != "")
+			{
+				$where.=" AND p.titre LIKE :titreRecherche";
+				$param = ['titreRecherche'=> '%'.$titreRecherche.'%', 'auteurRecherche'=> '%'.$auteurRecherche.'%'];
+			}
+		}
+		else if ($titreRecherche !="")
+		{
+			$where = "p.titre LIKE :titreRecherche";
+			$param = ['titreRecherche'=> '%'.$titreRecherche.'%'];
+		}
 		$repository = $em->getRepository('AppBundle:livre');
 		$query = $repository->createQueryBuilder('p')
 		->select('p')
-		->where('p.titre LIKE :titreRecherche')
-		->setParameters(['titreRecherche'=> '%'.$titreRecherche.'%'])
 		->getQuery();
+		if (isset($where))
+		{
+			$query = $repository->createQueryBuilder('p')
+			->select('p')
+			->where($where)
+			->setParameters($param)
+			->getQuery();
+		}
 		 return $query->getResult();
 	}
-
 	public function panierAction (Request $requete)
 	{
 		$manager=$this->getDoctrine ()->getManager ();

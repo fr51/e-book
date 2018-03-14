@@ -2,7 +2,7 @@
 {
 	background-color: #FFFFF0;
 	border: 1px solid black;
-	height: 500px;
+	height: 600px;
 }
 
 .boucleDiv
@@ -88,6 +88,7 @@ table img
 }
 .recherche
 {
+	background-color:white;
 	margin-top:1%;
 	margin-bottom:2%;
 }

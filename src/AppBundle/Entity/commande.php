@@ -24,7 +24,7 @@ class commande
     /**
      * @var int
      *
-     * @ORM\ManyToOne(targetEntity="utilisateur", inversedBy="utilisateurs")
+     * @ORM\ManyToOne(targetEntity="utilisateur")
      */
     private $utilisateur;
 
@@ -41,13 +41,6 @@ class commande
      * @ORM\Column(name="date_envoi", type="date")
      */
     private $dateEnvoi;
-
-    /**
-     * @var \details_commande
-     *
-     * @ORM\OneToMany(targetEntity="details_commande" , mappedBy="commande" , cascade={"remove","persist"})
-     */
-    private $commandes;
 
     /**
      * Get id

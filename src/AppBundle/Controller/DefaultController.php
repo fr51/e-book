@@ -76,6 +76,7 @@ class DefaultController extends Controller
 		$livre=$em->getRepository ("AppBundle:livre")->find ($id);
 
 		$prix_unitaire=$livre->getPrixUnitaire ();
+
 		$prix=$prix_unitaire*$quantite;
 
 		$commande=new commande ();
@@ -88,15 +89,18 @@ class DefaultController extends Controller
 		$em->flush ();
 
 		$details_commande=new details_commande ();
+
 		$details_commande->setCommande ($commande);
 		$details_commande->setLivre ($livre);
 		$details_commande->setPrix ($prix);
 		$details_commande->setQuantite ($quantite);
 
 		$em->persist ($details_commande);
+
 		$em->flush ();
 
 		$reponse=new Response ();
+
 		$reponse->setStatusCode (200);
 
 		return ($reponse);
@@ -117,6 +121,12 @@ class DefaultController extends Controller
 
 	public function panierAction (Request $requete)
 	{
-		return ($this->render ("@App/panier.html.twig"));
+		$manager=$this->getDoctrine ()->getManager ();
+
+		$utilisateur=$this->container->get ("security.token_storage")->getToken ()->getUser ();
+
+		$commandes=$manager->getRepository ("AppBundle:commande")->findBy (["utilisateur" => $utilisateur]);
+
+		return ($this->render ("@App/panier.html.twig", ["commandes" => $commandes]));
 	}
 }

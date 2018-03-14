@@ -5,11 +5,11 @@
 			détails livre
 		</title>
 
-		<link rel="stylesheet" type="text/css" href="{{ asset ("css/test.css") }}">
+		<link rel="stylesheet" type="text/css" href="{{ asset ('css/test.css') }}">
 
-		<link rel="icon" type="image/x-icon" href="{{ asset ("favicon.ico") }}">
+		<link rel="icon" type="image/x-icon" href="{{ asset ('favicon.ico') }}">
 
-		<script type="text/javascript" src="{{ asset ("JS/jquery-3.3.1.min.js") }}">
+		<script type="text/javascript" src="{{ asset ('JS/jquery-3.3.1.min.js') }}">
 		</script>
 
 		<script type="text/javascript">
@@ -53,13 +53,31 @@
 	</head>
 
 	<body>
-		<div style="border: 1px solid #FFFF00;">
-			<a href="{{ path ("accueil_details") }}">
+		{% if app.user %}
+			<div class="image">
+				<div class="test">
+					<form class="bouton" action="http://localhost/ebook/web/app_dev.php/accueil" method="POST">
+						<input type="submit" name="connexion" value="Déconnexion" />
+					</form>
+				</div>
+
+				<br>
+				<br>
+
+				Bienvenue, {{ app.user.username }}
+			</div>
+		{% endif %}
+
+		<div>
+			<a href="{{ path ('accueil_details') }}">
 				retour
 			</a>
 		</div>
+
+		<br>
+
 		<div class="details_infos">
-			<table border="1">
+			<table>
 				<tr>
 					<th>
 						titre
@@ -101,16 +119,36 @@
 					</td>
 				</tr>
 				<tr>
-					<th colspan="2">
-						<input type="button" value="commander" id="commander">
-
+					<td colspan="2">
+						&nbsp;
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<input type="button" value="ajouter au panier" id="commander">
+					</th>
+					<td>
 						<select name="quantite" id="quantite">
-							{% for i in 1..10 %} {#finir ajout details commande et faire page panier#}
+							{% for i in 1..10 %}
 								<option value="{{ i }}">
 									{{ i }}
 								</option>
 							{% endfor %}
 						</select>
+
+						examplaire(s)
+					</td>
+				</tr>
+				<tr>
+					<th colspan="2">
+						&nbsp;
+					</th>
+				</tr>
+				<tr>
+					<th colspan="2">
+						<a href="{{ path ('panier') }}">
+							accéder au panier
+						</a>
 					</th>
 				</tr>
 			</table>

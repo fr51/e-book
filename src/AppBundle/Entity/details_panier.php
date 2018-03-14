@@ -5,12 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * details_commande
+ * details_panier
  *
- * @ORM\Table(name="details_commande")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\details_commandeRepository")
+ * @ORM\Table (name="details_panier")
+ * @ORM\Entity (repositoryClass="AppBundle\Repository\details_panierRepository")
  */
-class details_commande
+class details_panier
 {
     /**
      * @var int
@@ -22,16 +22,16 @@ class details_commande
     private $id;
     
     /**
-     * @var \AppBundle\Entity\commande
+     * @var int
      *
-     * @ORM\ManyToOne(targetEntity="commande")
+     * @ORM\ManyToOne (targetEntity="panier")
      */
-    private $commande;
+    private $panier;
 
     /**
-     * @var \AppBundle\Entity\livre
+     * @var int
      *
-     * @ORM\ManyToOne(targetEntity="livre")
+     * @ORM\ManyToOne (targetEntity="livre")
      */
     private $livre;
 
@@ -49,7 +49,6 @@ class details_commande
      */
     private $quantite;
 
-
     /**
      * Get id
      *
@@ -61,27 +60,25 @@ class details_commande
     }
 
     /**
-     * Set commande
+     * Set panier
      *
-     * @param \AppBundle\Entity\commande $commande
+     * @param int $panier
      *
-     * @return details_commande
+     * @return void
      */
-    public function setCommande($commande)
+    public function setPanier ($panier)
     {
-        $this->commande = $commande;
-
-        return $this;
+        $this->panier=$panier;
     }
 
     /**
-     * Get commande
+     * Get panier
      *
-     * @return \AppBundle\Entity\commande
+     * @return int
      */
-    public function getCommande()
+    public function getPanier ()
     {
-        return $this->commande;
+        return ($this->panier);
     }
 
     /**
@@ -89,19 +86,17 @@ class details_commande
      *
      * @param \AppBundle\Entity\livre $livre
      *
-     * @return details_commande
+     * @return void
      */
     public function setLivre($livre)
     {
         $this->livre = $livre;
-
-        return $this;
     }
 
     /**
      * Get livre
      *
-     * @return \AppBundle\Entity\livre
+     * @return int
      */
     public function getLivre()
     {
@@ -113,13 +108,11 @@ class details_commande
      *
      * @param float $prix
      *
-     * @return details_commande
+     * @return void
      */
     public function setPrix($prix)
     {
         $this->prix = $prix;
-
-        return $this;
     }
 
     /**
@@ -137,14 +130,12 @@ class details_commande
      *
      * @param integer $quantite
      *
-     * @return details_commande
+     * @return void
      */
     public function setQuantite($quantite)
-    {
-        $this->quantite = $quantite;
-
-        return $this;
-    }
+	{
+		$this->quantite=$quantite;
+	}
 
     /**
      * Get quantite

@@ -13,6 +13,32 @@
 	</head>
 
 	<body>
-		//?
+		{% if app.user %}
+			<div class="image">
+				<div class="test">
+					<form class="bouton" action="http://localhost/ebook/web/app_dev.php/accueil" method="POST">
+						<input type="submit" name="connexion" value="Déconnexion" />
+					</form>
+				</div>
+
+				<br>
+				<br>
+
+				Bienvenue, {{ app.user.username }}
+			</div>
+		{% endif %}
+
+		<a href="{{ path ('accueil_details') }}">
+			retour au choix de livres
+		</a>
+
+		<br>
+		<br>
+
+		{#% if panier is defined and panier is not empty %}
+			{{ panier.id }}
+		{% else %}
+			Votre panier est vide
+		{% endif %#}
 	</body>
 </html>

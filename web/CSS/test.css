@@ -10,7 +10,6 @@
 	width:20%;
 	float: left;
 }
-
 table
 {
 	color: black;
@@ -21,20 +20,6 @@ table
 table img
 {
 	width:100%;
-}
-
-.details_infos
-{
-	width: 49%;
-	float: left;
-	height: 700px;
-}
-
-.details_couverture
-{
-	width: 49%;
-	float: right;
-	height: 700px;
 }
 .formulaire
 {
@@ -91,4 +76,36 @@ table img
 	background-color:white;
 	margin-top:1%;
 	margin-bottom:2%;
+}
+.details_infos
+{
+	width: 50%;
+	float: left;
+	background-color: #FFFFF0;
+}
+.details_infos table
+{
+	border:1px solid black;
+	height: 400px;
+}
+.details_infos .bordure td 
+{
+	border-left: 1px solid black;
+}
+.details_infos .bordure td , .details_infos .bordure th
+{
+	border-bottom:1px solid black;
+	
+}
+.details_couverture
+{
+	width: 50%;
+	float: right;
+	background-color: #FFFFF0;
+}
+.details_couverture img
+{
+	display: block;
+    margin-left: auto;
+    margin-right: auto
 }

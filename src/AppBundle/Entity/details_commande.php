@@ -29,25 +29,11 @@ class details_commande
     private $commande;
 
     /**
-     * @var \AppBundle\Entity\livre
+     * @var \AppBundle\Entity\panier
      *
-     * @ORM\ManyToOne(targetEntity="livre")
+     * @ORM\ManyToOne (targetEntity="panier")
      */
-    private $livre;
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="prix", type="float")
-     */
-    private $prix;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="quantite", type="integer")
-     */
-    private $quantite;
+    private $panier;
 
 
     /**
@@ -84,75 +70,25 @@ class details_commande
         return $this->commande;
     }
 
-    /**
-     * Set livre
-     *
-     * @param \AppBundle\Entity\livre $livre
-     *
-     * @return details_commande
-     */
-    public function setLivre($livre)
-    {
-        $this->livre = $livre;
-
-        return $this;
-    }
+	/**
+	 * Get panier
+	 *
+	 * @return \AppBundle\Entity\panier
+	 */
+	public function get_panier ()
+	{
+		return $this->panier;
+	}
 
     /**
-     * Get livre
+     * Set panier
      *
-     * @return \AppBundle\Entity\livre
+     * @param \AppBundle\Entity\panier $panier
+     *
+     * @return void
      */
-    public function getLivre()
+    public function set_panier ($panier)
     {
-        return $this->livre;
-    }
-
-    /**
-     * Set prix
-     *
-     * @param float $prix
-     *
-     * @return details_commande
-     */
-    public function setPrix($prix)
-    {
-        $this->prix = $prix;
-
-        return $this;
-    }
-
-    /**
-     * Get prix
-     *
-     * @return float
-     */
-    public function getPrix()
-    {
-        return $this->prix;
-    }
-
-    /**
-     * Set quantite
-     *
-     * @param integer $quantite
-     *
-     * @return details_commande
-     */
-    public function setQuantite($quantite)
-    {
-        $this->quantite = $quantite;
-
-        return $this;
-    }
-
-    /**
-     * Get quantite
-     *
-     * @return int
-     */
-    public function getQuantite()
-    {
-        return $this->quantite;
+        $this->panier=$panier;
     }
 }

@@ -14,10 +14,6 @@ details:
   path: /details/{id}
   defaults: {_controller:AppBundle:Default:details}
 
-commande:
-  path: /commande/{id}
-  defaults: {_controller:AppBundle:Default:commande}
-
 recherche:
   path: /recherche
   defaults: {_controller:AppBundle:Default:recherche}
@@ -25,3 +21,7 @@ recherche:
 panier:
   path: /panier
   defaults: {_controller:AppBundle:Default:panier}
+
+panier_ajout:
+  path: /ajout_panier/{id}
+  defaults: {_controller:AppBundle:Default:panier_ajout}

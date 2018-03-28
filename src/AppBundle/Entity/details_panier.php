@@ -22,25 +22,18 @@ class details_panier
     private $id;
     
     /**
-     * @var int
+     * @var \AppBundle\Entity\panier
      *
      * @ORM\ManyToOne (targetEntity="panier")
      */
     private $panier;
 
     /**
-     * @var int
+     * @var \AppBundle\Entity\livre
      *
      * @ORM\ManyToOne (targetEntity="livre")
      */
     private $livre;
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="prix", type="float")
-     */
-    private $prix;
 
     /**
      * @var int
@@ -62,7 +55,7 @@ class details_panier
     /**
      * Set panier
      *
-     * @param int $panier
+     * @param \AppBundle\Entity\panier $panier
      *
      * @return void
      */
@@ -74,7 +67,7 @@ class details_panier
     /**
      * Get panier
      *
-     * @return int
+     * @return \AppBundle\Entity\panier
      */
     public function getPanier ()
     {
@@ -96,33 +89,11 @@ class details_panier
     /**
      * Get livre
      *
-     * @return int
+     * @return \AppBundle\Entity\livre
      */
     public function getLivre()
     {
         return $this->livre;
-    }
-
-    /**
-     * Set prix
-     *
-     * @param float $prix
-     *
-     * @return void
-     */
-    public function setPrix($prix)
-    {
-        $this->prix = $prix;
-    }
-
-    /**
-     * Get prix
-     *
-     * @return float
-     */
-    public function getPrix()
-    {
-        return $this->prix;
     }
 
     /**

@@ -4,6 +4,8 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\commande;
 use AppBundle\Entity\details_commande;
+use AppBundle\Entity\details_panier;
+use AppBundle\Entity\panier;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,6 +41,7 @@ class DefaultController extends Controller
 		return ($this->render ("@App/accueil.html.twig", ["livres" => $livres]));
 
 	}
+
 	public function accueil_detailsAction (Request $request)
 	{
 		$em=$this->getDoctrine ()->getManager ();
@@ -53,6 +56,7 @@ class DefaultController extends Controller
 		return ($this->render ("@App/accueil_details.html.twig", ["livres" => $livres]));
 		
 	}
+
 	public function detailsAction (Request $request, $id)
 	{
 		$em=$this->getDoctrine ()->getManager();
@@ -62,40 +66,45 @@ class DefaultController extends Controller
 		return ($this->render ("@App/details.html.twig", ["livre" => $livre]));
 	}
 
-	public function commandeAction (Request $requete)
+	public function panier_ajoutAction (Request $requete)
 	{
-		$id=(int) $requete->request->get ("livre");
+		$id_livre=(int) $requete->request->get ("livre");
 		$quantite=$requete->request->get ("quantite");
+		$date_1=$requete->request->get ("date_1");
+		$date_2=$requete->request->get ("date_2");
 
 		$utilisateur=$this->container->get ("security.token_storage")->getToken ()->getUser ();
 
-		$em=$this->getDoctrine ()->getManager ();
+		$manager=$this->getDoctrine ()->getManager ();
 
-		$livre=$em->getRepository ("AppBundle:livre")->find ($id);
+		$livre=$manager->getRepository ("AppBundle:livre")->find ($id_livre);
 
 		$prix_unitaire=$livre->getPrixUnitaire ();
 
 		$prix=$prix_unitaire*$quantite;
 
-		$commande=new commande ();
+		$panier=$manager->getRepository ("AppBundle:panier")->get_panier_par_date_ajout ($date_1, $date_2);
 
-		$commande->setUtilisateur ($utilisateur);
-		$commande->setDateCommande (new \DateTime ());
-		$commande->setDateEnvoi (new \DateTime ());
+		if (count ($panier)==0)
+		{
+			$panier=new panier ();
+		}
 
-		$em->persist ($commande);
-		$em->flush ();
+		$panier->setUtilisateur ($utilisateur);
+		$panier->setDateAjout (new \DateTime ());
+		$panier->setPrix ($prix);
 
-		$details_commande=new details_commande ();
+		$manager->persist ($panier);
+		$manager->flush ();
 
-		$details_commande->setCommande ($commande);
-		$details_commande->setLivre ($livre);
-		$details_commande->setPrix ($prix);
-		$details_commande->setQuantite ($quantite);
+		$details_panier=new details_panier ();
 
-		$em->persist ($details_commande);
+		$details_panier->setPanier ($panier);
+		$details_panier->setLivre ($livre);
+		$details_panier->setQuantite ($quantite);
 
-		$em->flush ();
+		$manager->persist ($details_panier);
+		$manager->flush ();
 
 		$reponse=new Response ();
 
@@ -103,6 +112,7 @@ class DefaultController extends Controller
 
 		return ($reponse);
 	}
+
 	private function recherche ($titreRecherche,$auteurRecherche, $em)
 	{
 		$titreRecherche=(string) $titreRecherche;
@@ -137,6 +147,7 @@ class DefaultController extends Controller
 		}
 		 return $query->getResult();
 	}
+
 	public function panierAction (Request $requete)
 	{
 		$manager=$this->getDoctrine ()->getManager ();

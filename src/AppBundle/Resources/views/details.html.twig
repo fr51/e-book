@@ -15,13 +15,44 @@
 		<script type="text/javascript">
 			$ (document).ready (function ()
 			{
+				function formatage (d_t, anteriorite, decalage)
+				{
+					d_t=d_t.split (" ");
+
+					var d=d_t [0];
+
+					d=d.split ("/");
+					d=d [2]+"-"+d [1]+"-"+d [0];
+
+					var h=d_t [2];
+
+					if (anteriorite==1)
+					{
+						h=h.split (":");
+
+						h [1]=h [1]-decalage;
+
+						h=h [0]+":"+h [1]+":"+h [2];
+					}
+
+					d_t=d+" "+h;
+
+					return (d_t);
+				}
+
 				$ ("#commander").click (function ()
 				{
+					var date=new Date ().toLocaleString ();
+					var date_1=date;
+					var date_2=date_1; //antérieure à la 1ère date
+
+					date_1=formatage (date_1, 0, null);
+					date_2=formatage (date_2, 1, 10);
+
 					var livre={{ livre.id }};
-					var utilisateur={{ app.user.id }}
 					var quantite=$ ("#quantite").val ();
 
-					var url="{{ path ('commande', { 'id': 0 }) }}";
+					var url="{{ path ('panier_ajout', { 'id': 0 }) }}";
 					url=url.replace ("0", livre);
 
 					$.ajax (
@@ -33,16 +64,17 @@
 						data:
 						{
 							livre: livre,
-							utilisateur: utilisateur,
-							quantite: quantite
+							quantite: quantite,
+							date_1: date_1,
+							date_2: date_2
 						},
 						success: function (resultat)
 						{
-							alert ("commande effectuée");
+							alert ("livre ajouté au panier");
 						},
 						error: function (erreur)
 						{
-							alert ("erreur lors de la commande");
+							alert ("erreur lors de l'ajout au panier");
 						}
 					});
 				})

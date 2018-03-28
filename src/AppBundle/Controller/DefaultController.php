@@ -157,8 +157,12 @@ class DefaultController extends Controller
 
 		$utilisateur=$this->container->get ("security.token_storage")->getToken ()->getUser ();
 
-		$commandes=$manager->getRepository ("AppBundle:commande")->findBy (["utilisateur" => $utilisateur]);
+		$paniers=$manager->getRepository ("AppBundle:panier")->findBy (["utilisateur" => $utilisateur], ["dateAjout" => "DESC"]);
 
-		return ($this->render ("@App/panier.html.twig", ["commandes" => $commandes]));
+		$panier=$paniers [0]->getId ();
+
+		$details_panier=$manager->getRepository ("AppBundle:details_panier")->findBy (["panier" => $panier]);
+
+		return ($this->render ("@App/panier.html.twig", ["details_panier" => $details_panier]));
 	}
 }

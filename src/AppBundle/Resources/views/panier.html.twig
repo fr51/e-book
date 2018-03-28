@@ -35,10 +35,49 @@
 		<br>
 		<br>
 
-		{#% if panier is defined and panier is not empty %}
-			{{ panier.id }}
+		{% if details_panier is defined and details_panier is not empty %}
+			Voici le contenu de votre panier :
+
+			<br>
+			<br>
+
+			<table border="1">
+				<tr>
+					<th>
+						livre
+					</th>
+					<th>
+						quantité
+					</th>
+				</tr>
+
+				{% set total=0 %}
+
+				{% for detail in details_panier %}
+					{% set sous_total=0 %}
+
+					<tr>
+						<td>
+							{{ detail.livre.titre }} ({{ detail.livre.prixUnitaire }} € l'unité)
+						</td>
+						<td>
+							{{ detail.quantite }}
+						</td>
+					</tr>
+
+					{% set sous_total=detail.quantite*detail.livre.prixUnitaire %}
+
+					{% set total=total+sous_total %}
+				{% endfor %}
+
+				<tr>
+					<td colspan="2">
+						total : {{ total }} €
+					</td>
+				</tr>
+			</table>
 		{% else %}
 			Votre panier est vide
-		{% endif %#}
+		{% endif %}
 	</body>
 </html>

@@ -64,6 +64,13 @@ class livre
     private $prixUnitaire;
 
     /**
+     * @var string
+     * 
+     * @ORM\Column(name="dossier", type="string", length=50)
+     */
+    private $dossier;
+
+    /**
      * Get id
      *
      * @return int
@@ -215,6 +222,30 @@ class livre
     public function getPrixUnitaire()
     {
         return $this->prixUnitaire;
+    }
+
+    /**
+     * Set dossier
+     *
+     * @param string $dossier
+     *
+     * @return livre
+     */
+    public function setDossier($dossier)
+    {
+        $this->dossier = $dossier;
+
+        return $this;
+    }
+
+     /**
+     * Get dossier
+     *
+     * @return string
+     */
+    public function getDossier()
+    {
+        return $this->dossier;
     }
 }
 

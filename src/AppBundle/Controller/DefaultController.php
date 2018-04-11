@@ -2,8 +2,6 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\commande;
-use AppBundle\Entity\details_commande;
 use AppBundle\Entity\details_panier;
 use AppBundle\Entity\panier;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -12,9 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use AppBundle\Entity\utilisateur;
 use Symfony\Component\Security\Core\Security;
-use Symfony\Component\Validator\Constraints\Date;
 
 class DefaultController extends Controller
 {
@@ -69,12 +65,11 @@ class DefaultController extends Controller
 		return ($this->render ("@App/details.html.twig", ["livre" => $livre]));
 	}
 
-	public function panier_ajoutAction (Request $requete)
+	public function panier_ajoutAction (Request $requete) //verifier panier par rapport a commande (tant que commande non passee => ne pas ecraser panier) + faire sys commande
 	{
-		$id_livre=(int) $requete->request->get ("livre");
+		$id_livre=$requete->request->get ("livre");
+
 		$quantite=$requete->request->get ("quantite");
-		$date_1=$requete->request->get ("date_1");
-		$date_2=$requete->request->get ("date_2");
 
 		$utilisateur=$this->container->get ("security.token_storage")->getToken ()->getUser ();
 
@@ -82,22 +77,24 @@ class DefaultController extends Controller
 
 		$livre=$manager->getRepository ("AppBundle:livre")->find ($id_livre);
 
-		$prix_unitaire=$livre->getPrixUnitaire ();
+		$panier=$manager->getRepository ("AppBundle:panier")->findBy (["utilisateur" => $utilisateur]);
 
-		$prix=$prix_unitaire*$quantite;
-
-		$panier=$manager->getRepository ("AppBundle:panier")->get_panier_par_date_ajout ($date_1, $date_2);
-
-		if (count ($panier)==0)
+		if (sizeof ($panier)==0)
 		{
 			$panier=new panier ();
+
+			$panier->setPrix (0);
+
+			$manager->persist ($panier);
+		}
+		else
+		{
+			$panier=$panier [0];
 		}
 
 		$panier->setUtilisateur ($utilisateur);
 		$panier->setDateAjout (new \DateTime ());
-		$panier->setPrix ($prix);
 
-		$manager->persist ($panier);
 		$manager->flush ();
 
 		$details_panier=new details_panier ();
@@ -107,6 +104,18 @@ class DefaultController extends Controller
 		$details_panier->setQuantite ($quantite);
 
 		$manager->persist ($details_panier);
+		$manager->flush ();
+
+		$prix_panier_actuel=$panier->getPrix ();
+
+		$prix_unitaire=$details_panier->getLivre ()->getPrixUnitaire ();
+
+		$prix_tmp=$prix_unitaire*$quantite;
+
+		$prix_panier_actuel+=$prix_tmp;
+
+		$panier->setPrix ($prix_panier_actuel);
+
 		$manager->flush ();
 
 		$reponse=new Response ();
@@ -151,18 +160,44 @@ class DefaultController extends Controller
 		 return $query->getResult();
 	}
 
-	public function panierAction (Request $requete)
+	public function panierAction ()
 	{
 		$manager=$this->getDoctrine ()->getManager ();
 
 		$utilisateur=$this->container->get ("security.token_storage")->getToken ()->getUser ();
 
-		$paniers=$manager->getRepository ("AppBundle:panier")->findBy (["utilisateur" => $utilisateur], ["dateAjout" => "DESC"]);
+		$paniers=$manager->getRepository ("AppBundle:panier")->findBy (["utilisateur" => $utilisateur]);
 
-		$panier=$paniers [0]->getId ();
+		if (sizeof ($paniers)!=0)
+		{
+			$panier=$paniers [0]->getId ();
 
-		$details_panier=$manager->getRepository ("AppBundle:details_panier")->findBy (["panier" => $panier]);
+			$details_panier=$manager->getRepository ("AppBundle:details_panier")->findBy (["panier"=>$panier]);
 
-		return ($this->render ("@App/panier.html.twig", ["details_panier" => $details_panier]));
+			return ($this->render ("@App/panier.html.twig", ["details_panier"=>$details_panier]));
+		}
+		else
+		{
+			return ($this->render ("@App/panier.html.twig"));
+		}
+	}
+
+	public function commandeAction ()
+	{
+		/*bouton "valider cmd" sur la vue panier
+		+
+		remplir cmd & details_cmd (AJAX)
+		+
+		alerte cmd effectuee
+		+
+		suppr vue cmd
+		+
+		com fctn panier_ajout*/
+
+		$reponse=new Response ();
+
+		$reponse->setStatusCode (200);
+
+		return ($reponse);
 	}
 }

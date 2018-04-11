@@ -10,19 +10,4 @@ namespace AppBundle\Repository;
  */
 class panierRepository extends \Doctrine\ORM\EntityRepository
 {
-	public function get_panier_par_date_ajout ($date_1, $date_2) //formatées en JS (trop chiant en PHP)
-	{
-		$manager=$this->getEntityManager ();
-
-		$requete=$manager->createQueryBuilder ()
-							->select ("p")
-							->from ("AppBundle:panier", "p")
-							->where ("p.dateAjout<:heure_courante")
-							->andWhere ("p.dateAjout>:heure_passee")
-							->setParameter ("heure_courante",  $date_1)
-							->setParameter ("heure_passee", $date_2)
-							->getQuery ()->getResult ();
-
-		return ($requete);
-	}
 }

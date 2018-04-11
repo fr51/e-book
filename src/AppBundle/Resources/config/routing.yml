@@ -23,5 +23,5 @@ panier:
   defaults: {_controller:AppBundle:Default:panier}
 
 panier_ajout:
-  path: /ajout_panier/{id}
+  path: /ajout_panier
   defaults: {_controller:AppBundle:Default:panier_ajout}

@@ -17,9 +17,14 @@ table
 	height: 100px;
 	overflow: hidden;
 }
-table img
+table td 
 {
-	width:100%;
+	width:50%;
+	height: 10px;
+}
+table img 
+{
+	margin-left:15%;
 }
 .formulaire
 {
@@ -105,7 +110,16 @@ table img
 }
 .details_couverture img
 {
-	display: block;
-    margin-left: auto;
-    margin-right: auto
+    margin-left: 5%;
+}
+.details_couverture .details_couverture_image
+{
+	width: 45%;
+	float: left;
+}
+.details_couverture .details_couverture_pdf
+{
+	width: 45%;
+	float: left;
+	margin-left: 5%;
 }

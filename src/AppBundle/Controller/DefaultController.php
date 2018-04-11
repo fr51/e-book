@@ -65,8 +65,17 @@ class DefaultController extends Controller
 		$em=$this->getDoctrine ()->getManager();
 		
 		$livre=$em->getRepository ("AppBundle:livre")->find ($id);
+		$dir=$this->get('kernel')->getRootDir() . '/../web/img/pdf/' .$livre->getDossier();
+		$open = opendir($dir);
+		$all = array();
+		while(false !== ($entry = readdir($open))){
+			if ($entry != "." && $entry != "..")
+			{
+				array_push($all,$entry);
+			}
+		}
 
-		return ($this->render ("@App/details.html.twig", ["livre" => $livre]));
+		return ($this->render ("@App/details.html.twig", ["livre" => $livre , "dir" => $all]));
 	}
 
 	public function panier_ajoutAction (Request $requete)

@@ -163,14 +163,8 @@
 								</option>
 							{% endfor %}
 						</select>
-
 						Examplaire(s)
 					</td>
-				</tr>
-				<tr>
-					<th colspan="2">
-						&nbsp;
-					</th>
 				</tr>
 				<tr>
 					<th colspan="2">
@@ -182,7 +176,17 @@
 			</table>
 		</div>
 		<div class="details_couverture">
-			<img src="{{ asset('img/'~ livre.couverture)}}" width="" height="400px">
+			<div class="details_couverture_image">
+				<img src="{{ asset('img/'~ livre.couverture)}}" width="" height="400px">
+			</div>
+			<div class="details_couverture_pdf">
+				<center><h2>Pdf à télécharger </h2></center>
+				<ul>
+					{% for fichier in dir %}
+						<li><a href="{{ asset('img/pdf/' ~ livre.dossier ~ '/' ~ fichier)}}" target="blank_"> {{ fichier }}</a></li>
+					{% endfor %}
+				</ul>
+			</div>
 		</div>
 	</body>
 </html>
